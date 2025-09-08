@@ -6,76 +6,18 @@
   <title>Tom • Projects</title>
   <meta name="description" content="Projects and experiments by Tom." />
   <meta name="theme-color" content="#111" />
-  <style>
-    :root {
-      --bg: #0d0d0d;
-      --card: #1a1a1a;
-      --text: #f1f1f1;
-      --muted: #999;
-      --accent: #444;
-      --radius: 12px;
-      --shadow: 0 6px 18px rgba(0,0,0,.6);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #222;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      color: var(--muted);
-      margin: 0 10px;
-      text-decoration: none;
-    }
-    nav a:hover {
-      color: var(--text);
-    }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-    }
-    .card h2 {
-      margin-top: 0;
-      font-size: 20px;
-    }
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      padding: 40px 0;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>Tom</h1>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-content">
+      <h1>Tom's Project Site</h1>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main class="container">
@@ -110,8 +52,6 @@
     <p>© <span id="year"></span> Tom. Built with GitHub Pages.</p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
