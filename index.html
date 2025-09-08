@@ -1,277 +1,117 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!--
-    Minimal, modern GitHub Pages template
-    How to use:
-      1) Save this as index.html at the root of your repo (tom.github.io).
-      2) Edit the JSON in <script id="site-data"> to customize name, links, and projects.
-      3) Optional: add /assets images and update project thumbnails.
-  -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tom • Projects & Portfolio</title>
-  <meta name="description" content="Projects, experiments, and notes by Tom." />
-  <meta name="theme-color" content="#0ea5e9" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
-  <meta property="og:title" content="Tom • Projects & Portfolio" />
-  <meta property="og:description" content="Projects, experiments, and notes by Tom." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tom.github.io/" />
+  <title>Tom • Projects</title>
+  <meta name="description" content="Projects and experiments by Tom." />
+  <meta name="theme-color" content="#111" />
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-soft: #0f172a;
-      --card: #0b1220cc;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --brand: #38bdf8;
-      --accent: linear-gradient(135deg,#38bdf8, #a78bfa 60%, #f472b6);
-      --ring: 0 0 0 2px color-mix(in oklab, var(--brand), white 30%);
-      --shadow: 0 10px 30px -10px rgba(2,8,23,.7);
-      --radius: 16px;
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --text: #f1f1f1;
+      --muted: #999;
+      --accent: #444;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(0,0,0,.6);
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg: #f8fafc; --bg-soft:#f1f5f9; --card:#ffffffcc; --text:#0f172a; --muted:#475569; }
-      body::before { opacity:.08 }
-    }
-    * { box-sizing: border-box }
-    html, body { height: 100% }
+    * { box-sizing: border-box; }
     body {
-      margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text); background: radial-gradient(1200px 800px at 10% 0%, #111827 20%, transparent 60%) no-repeat, var(--bg);
-      position: relative; overflow-x: hidden;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
-    body::before{
-      content:""; position: fixed; inset: -20% -20% auto auto; width: 60vmax; height: 60vmax;
-      background: radial-gradient(closest-side, #38bdf830, transparent 70%);
-      filter: blur(60px); transform: translate3d(0,0,0); z-index: -1; pointer-events: none;
+    header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #222;
     }
-    .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px; }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0 8px; position: sticky; top: 0; backdrop-filter: saturate(160%) blur(8px); background: color-mix(in oklab, var(--bg), transparent 70%); z-index: 10; border-bottom: 1px solid color-mix(in oklab, var(--text), transparent 92%); }
-    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit }
-    .brand .logo { width:36px; height:36px; border-radius:12px; background: var(--accent); box-shadow: var(--shadow); position:relative; overflow:hidden }
-    .brand .logo::after{ content:""; position:absolute; inset:0; background: radial-gradient(60% 60% at 30% 30%, #fff8, transparent) }
-    .brand h1 { margin:0; font-size: clamp(18px, 2vw, 20px); font-weight: 700 }
-    nav { display:flex; gap:12px; align-items:center; flex-wrap: wrap }
-    nav a, .btn { padding: 10px 14px; border-radius: 12px; text-decoration: none; color: var(--text); background: color-mix(in oklab, var(--card), transparent 30%); border: 1px solid color-mix(in oklab, var(--text), transparent 90%); box-shadow: 0 1px 0 color-mix(in oklab, white, transparent 90%); transition: .2s ease; }
-    nav a:hover, .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow) }
-    .theme-toggle { cursor:pointer; border:none; background: transparent; font-size: 18px; padding: 8px 12px; border-radius: 10px; }
-
-    .hero { display:grid; grid-template-columns: 1.1fr .9fr; gap:36px; align-items:center; padding: 40px 0 20px }
-    .hero h2 { font-size: clamp(28px, 5vw, 48px); line-height: 1.1; margin: 0 0 8px; letter-spacing:-.02em }
-    .hero p { color: var(--muted); margin: 0 0 18px }
-    .tags { display:flex; flex-wrap:wrap; gap:8px; margin: 18px 0 0 }
-    .tag { padding:6px 10px; border-radius: 999px; font-size: 13px; color: var(--text); background: color-mix(in oklab, var(--card), transparent 20%); border:1px solid color-mix(in oklab, var(--text), transparent 90%) }
-
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text), transparent 92%); border-radius: var(--radius); box-shadow: var(--shadow) }
-    .card-header { padding: 18px 20px; border-bottom: 1px solid color-mix(in oklab, var(--text), transparent 92%); display:flex; gap:14px; align-items:center }
-    .card-header h3 { margin:0; font-size: 16px }
-    .card-body { padding: 18px 20px }
-
-    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap:18px }
-    .projects .project { grid-column: span 6; display:flex; flex-direction:column; overflow:hidden }
-    .project .thumb { aspect-ratio: 16/9; background: #0a0f1c; display:grid; place-items:center; color:#94a3b8; font-size:14px }
-    .project .thumb img { width: 100%; height: 100%; object-fit: cover }
-    .project .content { padding: 14px 16px 16px }
-    .project h4 { margin:0 0 4px; font-size: 18px }
-    .project p { margin:0 0 10px; color: var(--muted) }
-    .project .meta { display:flex; gap:8px; flex-wrap:wrap }
-    .project .meta span { font-size:12px; padding:4px 8px; border:1px solid color-mix(in oklab, var(--text), transparent 88%); border-radius: 999px }
-
-    .split { display:grid; grid-template-columns: 1fr 1fr; gap:18px }
-    .about p { margin:0 }
-    .contact .list { display:flex; flex-direction:column; gap:10px }
-    .contact .list a { display:flex; align-items:center; gap:10px }
-
-    footer { padding: 40px 0 60px; color: var(--muted); text-align:center; font-size:14px }
-
-    @media (max-width: 900px){
-      .hero { grid-template-columns: 1fr; }
-      .projects .project { grid-column: span 12; }
-      .split { grid-template-columns: 1fr }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      color: var(--muted);
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: var(--text);
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 40px 0;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
-      <a class="brand" href="#top" aria-label="Home">
-        <div class="logo" aria-hidden="true"></div>
-        <h1 id="site-title">Tom</h1>
-      </a>
-      <nav aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌓</button>
-      </nav>
-    </div>
+    <h1>Tom</h1>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
   <main class="container">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div>
-        <h2 id="hero-title">Builder • Tinkerer • Problem Solver</h2>
-        <p id="hero-sub">I ship practical tools and playful experiments in Python, Java, and C++. Here are a few recent highlights.</p>
-        <div class="tags" id="hero-tags"></div>
-        <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn" id="cta-primary" href="#projects">View Projects</a>
-          <a class="btn" id="cta-secondary" href="https://github.com/tom" target="_blank" rel="noopener">GitHub ↗</a>
-        </div>
-      </div>
+    <section id="projects">
       <div class="card">
-        <div class="card-header"><h3>Now</h3><span style="margin-left:auto; color:var(--muted); font-size:13px" id="now-time"></span></div>
-        <div class="card-body" id="now-card">
-          <p>• Packaging a Python app with Nuitka<br>• Building a RuneLite automation toolkit<br>• Prototyping a tiny crypto scalper</p>
-        </div>
+        <h2>Projects</h2>
+        <p>Here are some things I’m working on:</p>
+        <ul>
+          <li><a href="https://github.com/SafeRS-io/SafeRS" target="_blank">SafeRS DevTools</a> – RuneLite automation toolkit.</li>
+          <li><a href="https://github.com/your-org/crypto-flipper" target="_blank">Crypto Flipper</a> – A tiny Binance scalper bot.</li>
+          <li><a href="https://github.com/your-org/typ" target="_blank">TYP – YouTube Premium UI</a> – Desktop YouTube viewer with downloads.</li>
+        </ul>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="projects">
-      <div class="card" style="margin-top:8px">
-        <div class="card-header"><h3>Projects</h3></div>
-        <div class="card-body">
-          <div class="grid" id="projects-grid" aria-live="polite"></div>
-        </div>
+    <section id="about">
+      <div class="card">
+        <h2>About</h2>
+        <p>I build tools and experiments in Python, Java, and C++. By day I work in healthcare software, and in my free time I tinker with bots, APIs, and desktop apps.</p>
       </div>
     </section>
 
-    <!-- ABOUT / CONTACT -->
-    <section class="split" style="margin-top:18px">
-      <div class="card about" id="about">
-        <div class="card-header"><h3>About</h3></div>
-        <div class="card-body">
-          <p id="about-text">Day job: healthcare software. Nights and weekends: shipping open‑source utilities, bots, and playful experiments. I like clean APIs, crisp UIs, and pragmatic docs.</p>
-        </div>
-      </div>
-      <div class="card contact" id="contact">
-        <div class="card-header"><h3>Contact</h3></div>
-        <div class="card-body">
-          <div class="list" id="contact-list">
-            <a href="mailto:hello@example.com">📧 Email</a>
-            <a href="https://github.com/tom" target="_blank" rel="noopener">💻 GitHub</a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener">🔗 LinkedIn</a>
-          </div>
-        </div>
+    <section id="contact">
+      <div class="card">
+        <h2>Contact</h2>
+        <p><a href="mailto:hello@example.com">Email</a> • <a href="https://github.com/tom" target="_blank">GitHub</a> • <a href="https://www.linkedin.com" target="_blank">LinkedIn</a></p>
       </div>
     </section>
-
-    <footer>
-      <p id="footer-copy">© <span id="year"></span> Tom. Built with ♥ and GitHub Pages.</p>
-    </footer>
   </main>
 
-  <!-- Data you can edit quickly without touching markup -->
-  <script id="site-data" type="application/json">
-  {
-    "name": "Tom",
-    "tagline": "My Projects",
-    "intro": "I ship practical tools and playful experiments in Python, Java, and C++. Here are a few recent highlights.",
-    "tags": ["Python", "Java", "C++", "Open Source"],
-    "links": {
-      "github": "https://github.com/tom",
-      "email": "mailto:hello@example.com",
-      "linkedin": "https://www.linkedin.com"
-    },
-    "projects": [
-      {
-        "title": "SafeRS DevTools",
-        "desc": "RuneLite automation toolkit with HTTP endpoints and overlays.",
-        "href": "https://github.com/SafeRS-io/SafeRS",
-        "thumb": "assets/safers.jpg",
-        "tags": ["Java", "RuneLite", "Automation"]
-      },
-      {
-        "title": "Crypto Flipper",
-        "desc": "Tiny Binance scalper focusing on high-liquidity pairs.",
-        "href": "https://github.com/your-org/crypto-flipper",
-        "thumb": "assets/crypto.jpg",
-        "tags": ["Python", "Trading", "WebSocket"]
-      },
-      {
-        "title": "TYP – YouTube Premium UI",
-        "desc": "A sleek desktop YouTube viewer with downloads and VLC.",
-        "href": "https://github.com/your-org/typ",
-        "thumb": "assets/typ.jpg",
-        "tags": ["PyQt", "Desktop", "Media"]
-      },
-      {
-        "title": "Nuitka One‑File Guide",
-        "desc": "Opinionated docs + examples for packaging Python apps.",
-        "href": "https://github.com/your-org/nuitka-guide",
-        "thumb": "assets/nuitka.jpg",
-        "tags": ["Docs", "Packaging"]
-      }
-    ]
-  }
-  </script>
+  <footer>
+    <p>© <span id="year"></span> Tom. Built with GitHub Pages.</p>
+  </footer>
 
   <script>
-    // Lightweight site hydration from JSON above
-    const data = JSON.parse(document.getElementById('site-data').textContent);
-    const $ = s => document.querySelector(s);
-
-    // Title & hero
-    $('#site-title').textContent = data.name;
-    document.title = `${data.name} • Projects & Portfolio`;
-    $('#hero-title').textContent = data.tagline || 'Projects & Portfolio';
-    $('#hero-sub').textContent = data.intro || '';
-
-    // Tags
-    const tagsEl = document.getElementById('hero-tags');
-    (data.tags||[]).forEach(t => {
-      const el = document.createElement('span'); el.className = 'tag'; el.textContent = t; tagsEl.appendChild(el);
-    });
-
-    // Links
-    if (data.links?.github) $('#cta-secondary').href = data.links.github;
-    const contactList = $('#contact-list');
-    contactList.innerHTML = '';
-    if (data.links?.email) contactList.insertAdjacentHTML('beforeend', `<a href="${data.links.email}">📧 Email</a>`);
-    if (data.links?.github) contactList.insertAdjacentHTML('beforeend', `<a target="_blank" rel="noopener" href="${data.links.github}">💻 GitHub</a>`);
-    if (data.links?.linkedin) contactList.insertAdjacentHTML('beforeend', `<a target="_blank" rel="noopener" href="${data.links.linkedin}">🔗 LinkedIn</a>`);
-
-    // Projects grid
-    const grid = document.getElementById('projects-grid');
-    grid.innerHTML = '';
-    (data.projects||[]).forEach(p => {
-      const tags = (p.tags||[]).map(t=>`<span>${t}</span>`).join('');
-      const thumb = p.thumb ? `<img loading="lazy" src="${p.thumb}" alt="${p.title} thumbnail"/>` : `<div style="padding:20px">No image</div>`;
-      grid.insertAdjacentHTML('beforeend', `
-        <article class="card project">
-          <a class="thumb" href="${p.href}" target="_blank" rel="noopener">${thumb}</a>
-          <div class="content">
-            <h4><a href="${p.href}" target="_blank" rel="noopener" style="color:inherit; text-decoration:none">${p.title} ↗</a></h4>
-            <p>${p.desc||''}</p>
-            <div class="meta">${tags}</div>
-          </div>
-        </article>
-      `);
-    });
-
-    // Footer year
-    $('#year').textContent = new Date().getFullYear();
-
-    // Theme toggle (persists in localStorage)
-    const themeToggle = $('#themeToggle');
-    const applyTheme = m => {
-      document.documentElement.dataset.theme = m;
-      if (m === 'light') document.documentElement.style.colorScheme = 'light';
-      else document.documentElement.style.colorScheme = 'dark';
-    };
-    const saved = localStorage.getItem('theme');
-    if (saved) applyTheme(saved);
-    themeToggle.addEventListener('click', () => {
-      const next = (document.documentElement.dataset.theme === 'light') ? 'dark' : 'light';
-      applyTheme(next); localStorage.setItem('theme', next);
-    });
-
-    // Simple "Now" timestamp
-    const fmt = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' });
-    document.getElementById('now-time').textContent = fmt.format(new Date());
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
